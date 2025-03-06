@@ -17,7 +17,7 @@ def compute_jacobian(thetas):
     J = np.zeros((3, 5))
     theta1, theta2, theta3, theta4, theta5 = thetas
     c1,c2,c3,c4,s1,s2,s3,s4 = np.cos(theta1), np.cos(theta2), np.cos(theta3), np.cos(theta4), np.sin(theta1), np.sin(theta2),np.sin(theta3), np.sin(theta4)
-    l1,l2,l3 = lengths[1], lengths[2], lengths[3], lengths[4]
+    l1,l2,l3,l4 = lengths[1], lengths[2], lengths[3], lengths[4]
 
 
     # Partial derivatives for Tx
@@ -65,7 +65,7 @@ def inv_kin(desired_end_effector_position, initial_guess=None):
 
         if np.linalg.norm(error) < threshold:
             
-            return thetas
+            return np.rad2deg(thetas)
 
         J = compute_jacobian(thetas)
         J_damped = J.T @ np.linalg.inv(J @ J.T + damping_factor**2 * np.eye(3))
@@ -74,6 +74,7 @@ def inv_kin(desired_end_effector_position, initial_guess=None):
         thetas += delta_thetas
 
      
-        thetas = np.clip(thetas, [-np.pi, -np.pi/2, -np.pi, -np.pi, -np.pi, -np.pi], [np.pi, np.pi/2, np.pi, np.pi, np.pi, np.pi])
+        thetas = np.clip(thetas, [-np.pi, -np.pi/2, -np.pi, -np.pi, -np.pi], [np.pi, np.pi/2, np.pi, np.pi, np.pi])
 
    
+print(inv_kin([10,19,0]))
