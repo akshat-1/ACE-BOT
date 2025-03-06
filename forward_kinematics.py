@@ -27,5 +27,7 @@ T5 = Matrix([[c5 ,-s5*np.cos(90), s5*np.sin(90), 0 ],
              [0,np.sin(90), np.cos(90),l3 ], 
              [0,0,0,1]])
 
-T05 =   T1*T2*T2*T4*T5
+T05 =   T1*T2*T3*T4*T5
+
+print(f"Tx = {T05[3]} /n Ty = {T05[7]} /n Tz = {T05[11]}")
 
