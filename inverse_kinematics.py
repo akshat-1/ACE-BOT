@@ -51,18 +51,19 @@ def compute_jacobian(thetas):
     return J
 
 def inv_kin(desired_end_effector_position, initial_guess=None):
+    desired_end_effector_position = np.array(desired_end_effector_position)
     if initial_guess is None:
         initial_guess = np.array([0.1, 0.1, 0.1, 0, 0])
     
     thetas = initial_guess
-    max_iterations = 1000
+    max_iterations = 1100
     threshold = 1e-4
     damping_factor = 0.01
+
 
     for i in range(max_iterations):
         current_position = forward_kinematics(thetas)
         error = desired_end_effector_position - current_position
-
         if np.linalg.norm(error) < threshold:
             
             return np.rad2deg(thetas)
@@ -77,4 +78,4 @@ def inv_kin(desired_end_effector_position, initial_guess=None):
         thetas = np.clip(thetas, [-np.pi, -np.pi/2, -np.pi, -np.pi, -np.pi], [np.pi, np.pi/2, np.pi, np.pi, np.pi])
 
    
-print(inv_kin([10,19,0]))
+print(inv_kin([15,16,0]))
