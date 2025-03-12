@@ -48,7 +48,7 @@ def compute_jacobian(thetas):
 def inv_kin(desired_end_effector_position, initial_guess=None):
     desired_end_effector_position = np.array(desired_end_effector_position)
     if initial_guess is None:
-        initial_guess = np.array([0.1, 0.1, 0.1, 0, 0])
+        initial_guess = np.array([0.1, 0.1, 0.1, 0.1, 0.1])
     
     thetas = initial_guess
     max_iterations = 1100
